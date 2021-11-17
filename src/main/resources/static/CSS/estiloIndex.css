@@ -1,0 +1,15 @@
+
+
+body, nav{
+    background-image: url("../IMG/libreria.jpg");
+    width: 100%;
+    height: 100%;
+    margin:0;
+    border:0;
+    padding:0;
+}
+
+h2, label {
+    color: aliceblue;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
