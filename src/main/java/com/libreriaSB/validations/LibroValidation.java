@@ -6,9 +6,9 @@ import com.libreriaSB.repositories.LibroRepository;
 
 public class LibroValidation {
 
-    private LibroRepository libroRepository;
+    private static LibroRepository libroRepository;
 
-    public void validarTitulo(String nombre) throws MyException {
+    public static void validarTitulo(String nombre) throws MyException {
         if (nombre == null) {
             throw new MyException("Ingrese el nombre");
         } else if (nombre.trim().isEmpty()) {
@@ -20,7 +20,7 @@ public class LibroValidation {
         }
     }
 
-    public void validarAnio(Integer anio) throws MyException {
+    public static void validarAnio(Integer anio) throws MyException {
         Calendar actual = Calendar.getInstance();
         if (anio == null) {
             throw new MyException("Ingrese un año");
@@ -32,7 +32,7 @@ public class LibroValidation {
 
     }
 
-    public void validarIsbn(Long isbn) throws MyException {
+    public static void validarIsbn(Long isbn) throws MyException {
         if (isbn == null) {
             throw new MyException("Debe ingresar el ISBN");
             //La expresión regular indica que comience en 978, que sean números del 0 al 9 y que sigan 10 dígitos

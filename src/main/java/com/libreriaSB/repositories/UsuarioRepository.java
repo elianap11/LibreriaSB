@@ -1,6 +1,5 @@
 package com.libreriaSB.repositories;
 
-import com.libreriaSB.entities.Rol;
 import com.libreriaSB.entities.Usuario;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,8 +13,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String>{
     
 //    // Alternativa de actualización de datos a través de consulta
     @Modifying
-    @Query("UPDATE Usuario u SET u.nombre = :nombre, u.apellido = :apellido, u.correo = :correo, u.clave = :clave, u.rol = :rol WHERE u.id = :id")
-    void modificar(@Param("id") String id, @Param("nombre") String nombre, @Param("apellido") String apellido, @Param("correo") String correo, @Param("clave") String clave, @Param("rol") Rol rol);
+    @Query("UPDATE Usuario u SET u.nombre = :nombre, u.apellido = :apellido, u.correo = :correo, u.clave = :clave, u.image = :image WHERE u.id = :id")
+    void modificar(@Param("id") String id, @Param("nombre") String nombre, @Param("apellido") String apellido, @Param("correo") String correo, @Param("clave") String clave, @Param("image") String image);
 
 //    // Creación de consulta a partir de JPQL
 //    @Query("SELECT u FROM Usuario u WHERE u.correo = :correo")
@@ -27,11 +26,12 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String>{
 
     // Creación de consulta a partir del nombre de método
     Optional<Usuario> findByCorreo(String correo);
-
+        
     // Creación de consulta a partir del nombre de método
     boolean existsByCorreo(String correo);
     
     @Modifying
     @Query("UPDATE Usuario l SET l.alta = true WHERE l.id = :id")
     void darDeAlta(@Param("id") String id);
+   
 }

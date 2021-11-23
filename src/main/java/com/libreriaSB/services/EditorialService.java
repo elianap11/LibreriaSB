@@ -3,7 +3,7 @@ package com.libreriaSB.services;
 import com.libreriaSB.entities.Editorial;
 import com.libreriaSB.exceptions.MyException;
 import com.libreriaSB.repositories.EditorialRepository;
-import com.libreriaSB.validations.EditorialValidation;
+import static com.libreriaSB.validations.EditorialValidation.validarNombre;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +16,10 @@ public class EditorialService {
     @Autowired
     private EditorialRepository editorialRepository;
 
-    private EditorialValidation editorialValidation;
-
     @Transactional
     public void crearEditorial(String nombre) throws MyException {
         
-        //EditorialValidation editorialValidation = new EditorialValidation();    
-        editorialValidation.validarNombre(nombre);
-        editorialValidation.validarRepetido(nombre);
+        validarNombre(nombre);
         
         Editorial editorial = new Editorial();
         editorial.setNombre(nombre);
@@ -50,8 +46,7 @@ public class EditorialService {
     
     @Transactional
     public void modificarEditorial(String id, String nombre) throws MyException {
-        editorialValidation.validarNombre(nombre);
-        editorialValidation.validarRepetido(nombre);
+        validarNombre(nombre);
 
         Editorial editorial = editorialRepository.findById(id).orElse(null);
         if(editorial == null){

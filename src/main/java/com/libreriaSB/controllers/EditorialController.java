@@ -39,7 +39,7 @@ public class EditorialController {
 
     @GetMapping("/crear")
     @PreAuthorize("hasRole('ADMIN')")
-    public ModelAndView crearEditorial() {
+    public ModelAndView crearEditorial(){
         ModelAndView mav = new ModelAndView("editorial-formulario");
         mav.addObject("editorial", new Editorial());
         mav.addObject("title", "Crear Editorial");

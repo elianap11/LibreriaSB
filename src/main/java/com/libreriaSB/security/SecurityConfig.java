@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+//darle permisos al usuario a través del rol
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -33,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 //se establecen rutas disponibles para cualquier usuario
-                    .antMatchers("/signup", "/registro", "/CSS/*", "/IMG/*").permitAll()
+                    .antMatchers("/signup", "/registro", "/CSS/*", "/IMG/*", "/UPLOAD/*").permitAll()
                 //todo lo demás debe estar autenticado    
                 .antMatchers("/**").authenticated()
                 .and()
@@ -45,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .usernameParameter("correo")
                         .passwordParameter("clave")
                 //el mensaje de éxito envía a la home
-                        .defaultSuccessUrl("/home", true)
+                        .defaultSuccessUrl("/index", true)
                 //el mensaje de error
                         .failureUrl("/login?error=true")
                         .permitAll()

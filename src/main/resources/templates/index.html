@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- habilito la seguridad en Thymeleaf-->
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
@@ -12,67 +13,9 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-dark bg-dark">
-
-    <div class="card text-dark bg-warning mb-3" style="max-width: 9rem;">
-      <div class="card-body">
-        <h2 class="card-title"><a th:href="@{/}">Inicio</a></h2>
-        <h6 class="card-subtitle mb-2 text-muted">Gestor de Librería</h6>
-      </div>
-    </div>
-
-    <div class="card text-dark bg-warning mb-3" style="width: 15rem;">
-      <div class="card-body">
-        <h5 class="card-title">Autores</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Elegir opción</h6>
-        <STYLE>
-          A {
-            text-decoration: none;
-            color: black;
-          }
-        </STYLE> <a class="card-link" th:href="@{/autores}">Mostrar todos</a>
-        <li sec:authorized="hasRole('ADMIN')">
-
-          <a class="card-link" th:href="@{/autores/crear}">Crear autor</a>
-
-        </li>
-      </div>
-    </div>
-    <div class="card text-dark bg-warning mb-3" style="width: 15rem;">
-      <div class="card-body">
-        <h5 class="card-title">Editoriales</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Elegir opción</h6>
-        <a class="card-link" th:href="@{/editoriales}">Mostrar todas</a>
-        <li sec:authorized="hasRole('ADMIN')">
-
-          <a class="card-link" th:href="@{/editoriales/crear}">Crear editorial</a>
-        </li>
-      </div>
-    </div>
-
-    <div class="card text-dark bg-warning mb-3" style="width: 15rem;">
-      <div class="card-body">
-        <h5 class="card-title">Libros</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Elegir opción</h6>
-        <a class="card-link" th:href="@{/libros}">Mostrar todos</a>
-        <li sec:authorized="hasRole('ADMIN')">
-
-          <a class="card-link" th:href="@{/libros/crear}">Crear libro</a>
-        </li>
-      </div>
-    </div>
-
-    <div class="card text-dark bg-warning mb-3" style="width: 15rem;">
-      <div class="card-body">
-        <h5 class="card-title">Usuarios</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Elegir opción</h6>
-        <a class="card-link" th:href="@{/usuario}">Mostrar todos</a>
-        <li sec:authorized="hasRole('ADMIN')">
-          <a class="card-link" th:href="@{/usuarios/crear}">Crear usuario</a>
-        </li>
-      </div>
-    </div>
-
+    
+      <nav th:replace=fragmento :: navbar class="navbar navbar-dark bg-dark"></nav>
+     
 </body>
 
 </html>

@@ -21,7 +21,8 @@
     <div>
   
         <div th:if="${editoriales.isEmpty()}">
-            <h5>No hay editoriales cargadas. <a th:href="@{/editoriales/crear}">Cargar editorial.</a></h5>
+            <h3 class="text-warning bg-dark">No hay editoriales. </h3> 
+            <h5><a style="color:white" th:href="@{/editorialesw/crear}">>> Cargar editorial <<</a> </h5>
         </div>
 
         <div th:unless="${editoriales.isEmpty()}">
@@ -32,8 +33,9 @@
                      <!--   <th>ID:</th> -->
                         <th>Nombre:</th>
                         <th>Estado:</th>
-                        <th>Acciones: </th>
-                        <th>Cambiar estado: </th>
+                        access="hasRole('ROLE_ADMIN')
+                        <th sec:authorized="hasRole('ADMIN')">Acciones: </th>
+                        <th sec:authorized="hasRole('ADMIN')">Cambiar estado: </th>
                     </tr>
                 </thead>
 
@@ -42,8 +44,8 @@
                         <div>
                          <!--   <td th:text="${editorial.id}"></td> -->
                             <td th:text="${editorial.nombre}"></td>
-                            <td th:text="${editorial.alta} ? 'Alta' : 'Baja'"></td>
-                            <td><a class="btn btn-primary" role="button" th:href="@{/editoriales/editar/__${editorial.id}__}">Editar</a></td>
+                            <td sec:authorized="hasRole('ADMIN')" th:text="${editorial.alta} ? 'Alta' : 'Baja'"></td>
+                            <td sec:authorized="hasRole('ADMIN')"><a class="btn btn-primary" role="button" th:href="@{/editoriales/editar/__${editorial.id}__}">Editar</a></td>
 
                             <td>
                                 <form th:if="${editorial.alta}" method="post"

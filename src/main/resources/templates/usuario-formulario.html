@@ -20,7 +20,8 @@
 <div th:if="${error != null}" class="alert alert-danger" th:text="${error}"></div>
 <div th:if="${exito != null}" class="alert alert-danger" th:text="${exito}"></div>
 
-<form autocomplete="off" id="formulario" method="POST" novalidate th:action="@{/usuarios/__${action}__}" th:object="${usuario}">
+<!-- ojo que me lleva a la ruta null-->
+<form autocomplete="off" id="formulario" method="POST" novalidate enctype= "multipart/form-data" th:action="@{/usuarios/__${action}__}" th:object="${usuario}">
   <h2 th:text="${title}"></h2>
 
   <div style="visibility: hidden">
@@ -62,24 +63,22 @@
         <input type="password" placeholder="Clave" id="clave" required th:field="*{clave}">
       </div>
   </div>
-
+  
   <div>
-    <label for="nombre">Rol: </label> <br />
-      <div class="input-group flex-nowrap">
-        <span class="input-group-text" id="addon-wrapping"></span>
-        <input type="number" placeholder="Rol" id="rol" required th:field="*{rol}">
-      </div>
-  </div>
+<label for = "foto">Cargar foto</label>
+<!-- el tipo de input es file y el accept significa que soporta imágenes de cualquier formato. El name foto es como lo enviamos en el @RequestParam del controlador -->
+<input type = "file" name = "foto" accept = "image/*">
+</div>
 
+      
+       
 <br>
   <div>
-    <button class="btn btn-outline-warning" th:text="${action == 'guardar'} ? 'Crear autor' : 'Guardar'" type="submit" id="button-addon2"></button>
+    <button class="btn btn-outline-warning" th:text="${action == 'guardar'} ? 'Crear usuario' : 'Guardar'" type="submit" id="button-addon2"></button>
   </div>
-
 
 </form>
 
- 
 </body>
 
 </html>

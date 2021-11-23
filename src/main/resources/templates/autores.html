@@ -14,16 +14,21 @@
     <body>
         <nav th:replace=fragmento :: navbar class="navbar navbar-dark bg-dark"></nav>
         
+
         <div th:if="${error != null}" class="alert alert-danger" th:text="${error}"></div>
         <div th:if="${exito != null}" class="alert alert-danger" th:text="${exito}"></div>
 
+
     <div>
 
+
         <div th:if="${autores.isEmpty()}">
-            <h5> No hay autores. <a th:href="@{/autores/crear}">Cargar autor.</a> </h5>
+            <h3 class="text-warning bg-dark"> No hay autores. </h3>
+            <h5><a style="color:white" th:href="@{/autores/crear}">>> Cargar autor <<</a> </h5>
         </div>
 
-        <div th:unless="${autores.isEmpty()}">
+
+        <div th:unless="${autores.isEmpty()}">          
 
             <table class="table table-dark table-sm">
 
@@ -31,9 +36,10 @@
                     <tr>
            <!--         <th>ID: </th> -->
                         <th>Nombre:</th>
-                        <th>Estado:</th>
-                        <th>Acciones: </th>
-                        <th>Cambiar estado: </th>
+                        <th sec:authorize="hasRole('ADMIN')">Estado:</th>
+                        <!-- Las acciones no las tiene que ver sin ser admin-->
+                        <th sec:authorize="hasRole('ADMIN')">Acciones: </th>
+                        <th sec:authorize="hasRole('ADMIN')">Cambiar estado: </th>
                     </tr>
                 </thead>
 
@@ -42,16 +48,16 @@
                 <div>
                   <!--  <td th:text="${autor.id}"></td> -->
                     <td th:text="${autor.nombre}"></td>
-                    <td th:text="${autor.alta} ? 'Alta' : 'Baja'"></td>
+                    <td sec:authorize="hasRole('ADMIN')" th:text="${autor.alta} ? 'Alta' : 'Baja'"></td>
                    
-                    <td> <a class="btn btn-primary" role="button" th:href="@{/autores/editar/__${autor.id}__}">Editar</a></td>
+                    <td sec:authorize="hasRole('ADMIN')"> <a class="btn btn-primary" role="button" th:href="@{/autores/editar/__${autor.id}__}">Editar</a></td>
 
                     <td>
                         <form th:if="${autor.alta}" method="post" th:action="@{/autores/eliminar/__${autor.id}__}">
-                            <button class="btn btn-outline-danger" type="submit">Dar de baja</button>
+                            <button sec:authorize="hasRole('ADMIN')" class="btn btn-outline-danger" type="submit">Dar de baja</button>
                         </form>
                         <form th:if="${!autor.alta}" method="post" th:action="@{/autores/alta/__${autor.id}__}">
-                            <button class="btn btn-outline-success" type="submit">Dar de alta</button>
+                            <button sec:authorize="hasRole('ADMIN')" class="btn btn-outline-success" type="submit">Dar de alta</button>
                         </form>
                     </td>
                 </div>

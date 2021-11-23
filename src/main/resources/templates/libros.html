@@ -23,7 +23,8 @@
     
 
         <div th:if="${libros.isEmpty()}">
-            <h5>No hay libros. <a th:href="@{/libros/crear}">Cargar libro.</a></h5>
+            <h3 class="text-warning bg-dark">No hay libros.</h3> 
+            <h5><a style="color:white" th:href="@{/libros/crear}"> >> Cargar libro. << </a></h5>
         </div>
 
         <div th:unless="${libros.isEmpty()}">
@@ -42,8 +43,8 @@
                         <th>Estado: </th>
                         <th>Autor: </th>
                         <th>Editorial: </th>
-                        <th>Acciones: </th>
-                        <th>Cambiar estado: </th>
+                        <th sec:authorized="hasRole('ADMIN')">Acciones: </th>
+                        <th sec:authorized="hasRole('ADMIN')">Cambiar estado: </th>
                     </tr>
                 </thead>
 
@@ -57,11 +58,11 @@
                             <td th:text="${libro.ejemplares}"></td>
                             <td th:text="${libro.ejemplaresPrestados}"></td>
                             <td th:text="${libro.ejemplaresRestantes}"></td>
-                            <td th:text="${libro.alta} ? 'Alta' : 'Baja'"></td>
+                            <td sec:authorized="hasRole('ADMIN')" th:text="${libro.alta} ? 'Alta' : 'Baja'"></td>
                             <td th:text="${libro.autor.nombre}"></td>
                             <td th:text="${libro.editorial.nombre}"></td>
 
-                            <td><a class="btn btn-primary" role="button" th:href="@{/libros/editar/__${libro.id}__}">Editar</a></td>
+                            <td sec:authorized="hasRole('ADMIN')"><a class="btn btn-primary" role="button" th:href="@{/libros/editar/__${libro.id}__}">Editar</a></td>
 
                             <td>
                                 <form th:if=${libro.alta} method="post" th:action="@{/libros/eliminar/__${libro.id}__}">

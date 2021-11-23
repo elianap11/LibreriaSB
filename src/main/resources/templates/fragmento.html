@@ -1,73 +1,105 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-</head>
-<body>    
-  
-  <nav class="navbar navbar-dark bg-dark">
-    
-    <div class="card text-dark bg-warning mb-3" style="max-width: 9rem;">
-      <div class="card-body">
-            <h2 class="card-title"><a th:href="@{/}">Inicio</a></h2>
-            <h6 class="card-subtitle mb-2 text-muted">Gestor de Librería</h6>
-          </div>
-        </div>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title></title>
+    </head>
+    <body>    
 
-        <div class="card text-dark bg-warning mb-3" style="width: 15rem;">
-          <div class="card-body">
-            <h5 class="card-title">Autores</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Elegir opción</h6>
-            <STYLE>A {text-decoration: none; color: black;} </STYLE> <a class="card-link" th:href="@{/autores}">Mostrar todos</a>
-            <li sec:authorized="hasRole('ADMIN')">
+        <nav class="navbar navbar-dark bg-dark">
 
-            <a class="card-link" th:href="@{/autores/crear}">Crear autor</a>
-
-            </li>              
-          </div>
-        </div>
-        <div class="card text-dark bg-warning mb-3" style="width: 15rem;">
-          <div class="card-body">
-            <h5 class="card-title">Editoriales</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Elegir opción</h6>
-            <a class="card-link" th:href="@{/editoriales}">Mostrar todas</a>
-            <li sec:authorized="hasRole('ADMIN')">
-
-            <a class="card-link" th:href="@{/editoriales/crear}">Crear editorial</a>
-            </li>
-          </div>
-        </div>
-
-        <div class="card text-dark bg-warning mb-3" style="width: 15rem;">
-          <div class="card-body">
-            <h5 class="card-title">Libros</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Elegir opción</h6>
-            <a class="card-link" th:href="@{/libros}">Mostrar todos</a>
-            <li sec:authorized="hasRole('ADMIN')">
-
-            <a class="card-link" th:href="@{/libros/crear}">Crear libro</a>
-            </li>
-          </div>
-        </div>
-
-        <div class="card text-dark bg-warning mb-3" style="width: 15rem;">
-          <div class="card-body">
-            <h5 class="card-title">Usuarios</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Elegir opción</h6>
-            <a class="card-link" th:href="@{/usuario}">Mostrar todos</a>
-            <li sec:authorized="hasRole('ADMIN')">
-            <a class="card-link" th:href="@{/usuarios/crear}">Crear usuario</a>
-          </li>
-          </div>
-        </div>
-
-       
-    
-      </nav>
+            <div class="card text-dark bg-warning mb-3" style="max-width: 10rem;">
+                <div  class="card-body">
+                    <h2 class="card-title"><a th:href="@{/index}">Inicio</a></h2>
+                    <h6 class="card-subtitle mb-2 text-muted">Gestor de Librería</h6>
+                </div>
+            </div>
 
 
-</body>
+
+            <div class="card text-dark bg-warning mb-3" style="width: 15rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Autores</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Elegir opción</h6>
+                    <STYLE>A {text-decoration: none; color: black;} </STYLE> <a class="card-link" th:href="@{/autores}">Mostrar todos</a>
+                    <li sec:authorize="hasRole('ADMIN')">
+
+                        <a class="card-link" th:href="@{/autores/crear}">Crear autor</a>
+
+                    </li>              
+                </div>
+            </div>
+            <div class="card text-dark bg-warning mb-3" style="width: 15rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Editoriales</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Elegir opción</h6>
+                    <a class="card-link" th:href="@{/editoriales}">Mostrar todas</a>
+
+                    <li sec:authorize="hasRole('ADMIN')">
+                        <a class="card-link" th:href="@{/editoriales/crear}">Crear editorial</a>
+                    </li>
+                </div>
+            </div>
+
+            <div class="card text-dark bg-warning mb-3" style="width: 15rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Libros</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Elegir opción</h6>
+                    <a class="card-link" th:href="@{/libros}">Mostrar todos</a>
+
+                    <li sec:authorize="hasRole('ADMIN')">
+                        <a class="card-link" th:href="@{/libros/crear}">Crear libro</a>
+                    </li>
+                </div>
+            </div>
+
+            <div sec:authorize="hasRole('ADMIN')">
+                <div class="card text-dark bg-warning mb-3" style="width: 15rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Usuarios</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Elegir opción</h6>
+                        <a class="card-link" th:href="@{/usuarios}">Mostrar todos</a>
+                        <li sec:authorize="hasRole('ADMIN')">
+                            <a class="card-link" th:href="@{/usuarios/crear}">Crear usuario</a>
+                        </li>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-dark bg-warning mb-3" style="max-width:10rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Salir</h5>
+                    <a class="card-link" th:href="@{/logout}">Finalizar sesión</a>
+
+                </div>
+            </div>
+
+        </nav>
+
+        <footer th:fragment="footer" class=" footer py-3 bg-warning">
+            <div class="container d-flex justify-content-center text-white">
+
+                <img class="rounded-circle"
+                     th:src="${session.image != null} ? @{/upload/__${session.image}__} : @{/upload/foto-no-disponible.png}"
+                     width="80"> 
+
+                <span class="text-dark" th:text="${session.id != null} ? |${session.nombre} ${session.apellido} - ${session.rol}| : 'Gestor de Librería'"></span>
+                <!-- <span th:text="${session.nombre +' ' + session.apellido}"</span> -->
+
+            </div>
+
+
+
+            <!--  <div class = "card mb-4 shadow">
+                  <div class = "card-body text-center my-2">
+                      //la clase "rounded-circle" muestra la foto como un círculo
+                      //Si coloco una imagen la muestra, sino pone una por defecto que le asigno
+                      <img class = "rounded-circle" th:src = "${usuario.image != null} ? @{/uploads/__${usuario.image}__} :  @{/uploads/foto-no-disponible.png}">
+                  </div>
+              </div> -->
+
+        </footer>
+    </body>
 </html>

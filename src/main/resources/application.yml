@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    url:
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+  thymeleaf:
+    cache: false
+  mvc:
+    format:
+      date: yyyy-MM-dd
+  mail:
+    host: 
+    port: 
+    username: 
+    password: 
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            required: true
+            enable: true
+          ssl:
+            trust: 
+logging:
+  level:
+      springframework:
+        web: debug
+my:
+    property: 

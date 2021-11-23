@@ -4,10 +4,10 @@ import com.libreriaSB.exceptions.MyException;
 import com.libreriaSB.repositories.EditorialRepository;
 
 public class EditorialValidation {
-    
+
     private EditorialRepository editorialRepository;
 
-    public void validarNombre(String nombre) throws MyException {
+    public static void validarNombre(String nombre) throws MyException {
         if (nombre == null) {
             throw new MyException("Ingrese el nombre");
         } else if (nombre.trim().isEmpty()) {
@@ -16,13 +16,10 @@ public class EditorialValidation {
             throw new MyException("El nombre debe ser ingresado con letras.");
         } else if (nombre.length() < 2) {
             throw new MyException("Nombre inválido, debe tener más de una letra");
+//        } else if (editorialRepository.buscarNombre(nombre).getAlta() == false) {
+//            throw new MyException("Ya existe el nombre de la editorial");
         }
-    }
 
-    public void validarRepetido(String nombre) throws MyException {
-        if (editorialRepository.buscarNombre(nombre).getAlta() == false) {
-            throw new MyException("Ya existe el nombre de la editorial");
-        }
     }
 }
 

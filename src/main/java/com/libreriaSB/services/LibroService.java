@@ -1,32 +1,32 @@
-
 package com.libreriaSB.services;
 
 import com.libreriaSB.entities.Autor;
 import com.libreriaSB.entities.Libro;
 import com.libreriaSB.entities.Editorial;
 import com.libreriaSB.exceptions.MyException;
-import com.libreriaSB.validations.LibroValidation;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.libreriaSB.repositories.LibroRepository;
+import static com.libreriaSB.validations.LibroValidation.validarAnio;
+import static com.libreriaSB.validations.LibroValidation.validarIsbn;
+import static com.libreriaSB.validations.LibroValidation.validarTitulo;
 
 @Service
 public class LibroService {
     
     @Autowired
     private LibroRepository libroRepository;
-    private LibroValidation libroValidation;
     
     @Transactional
     public void crearLibro(Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Autor autor, Editorial editorial) throws MyException {
 
-        //LibroValidation libroValidation = new LibroValidation();
-        libroValidation.validarTitulo(titulo);
-        libroValidation.validarAnio(anio);
-        libroValidation.validarIsbn(isbn);
+               // validarIsbn(isbn);
+
+        validarTitulo(titulo);
+        validarAnio(anio);
         
         Libro libro = new Libro();
         libro.setIsbn(isbn);
@@ -49,9 +49,10 @@ public class LibroService {
     
     @Transactional
     public void modificarLibro(String id, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Autor autor, Editorial editorial) throws MyException {
-        libroValidation.validarTitulo(titulo);
-        libroValidation.validarAnio(anio);
-        libroValidation.validarIsbn(isbn);
+        validarTitulo(titulo);
+        validarAnio(anio);
+       // validarIsbn(isbn);
+        
         Libro libro = libroRepository.findById(id).orElse(null);
         if (libro == null) {
             throw new MyException("No existe el libro.");

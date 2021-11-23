@@ -1,11 +1,12 @@
 package com.libreriaSB.entities;
 
+import com.libreriaSB.enums.Rol;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -45,21 +46,28 @@ public class Usuario {
 //    @LastModifiedDate //permite que se modifique la fecha
 //    private LocalDateTime fechaModificacion;
     
-    @ManyToOne
-    @JoinColumn(nullable = false)
+    private String image; 
+    
+    //¿No va @ManyToOne?
+    @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false)
     private Rol rol;
+    
+    //agrego el atributo para la imagen
+    //private String image;
    
     private Boolean alta; 
 
     public Usuario() {
     }
 
-    public Usuario(String id, String nombre, String apellido, String correo, String clave, Boolean alta) {
+    public Usuario(String id, String nombre, String apellido, String correo, String clave, String image, Boolean alta) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.clave = clave;
+        this.image = image;
         this.alta = alta;
     }
      

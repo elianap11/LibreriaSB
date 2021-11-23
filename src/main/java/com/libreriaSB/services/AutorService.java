@@ -21,8 +21,7 @@ public class AutorService {
     @Transactional
     public void crearAutor(String nombre) throws MyException{
 
-        //AutorValidation autorValidation = new AutorValidation();
-        autorValidation.validarNombre(nombre);
+        //autorValidation.validarNombre(nombre);
 
         Autor autor = new Autor();
         autor.setNombre(nombre);
@@ -43,7 +42,7 @@ public class AutorService {
 
     @Transactional
     public void modificarAutor(String id, String nombre) throws MyException {
-        autorValidation.validarNombre(nombre);
+        //autorValidation.validarNombre(nombre);
         Autor autor = autorRepository.findById(id).orElse(null);
         if (autor == null) {
             throw new MyException("No existe el autor.");
